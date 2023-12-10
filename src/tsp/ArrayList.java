@@ -1,7 +1,6 @@
 package tsp;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
@@ -20,23 +19,6 @@ public class ArrayList<T extends Comparable<T>> implements Iterable<T> {
             elements[i] = list.elements[i];
         }
     }
-
-    public static <T extends Comparable<T>> ArrayList<T> toMyList(java.util.ArrayList<T> list) {
-        ArrayList<T> my_list = new ArrayList<>();
-        for (T item : list) {
-            my_list.add(item);
-        }
-        return my_list;
-    }
-
-    public static tsp.ArrayList<TSPGene> graphNodesToMyList(List<TSPGene> list) {
-        ArrayList<TSPGene> my_list = new ArrayList<>();
-        for (TSPGene item : list) {
-            my_list.add(item);
-        }
-        return my_list;
-    }
-
 
     public ArrayList() {
         elements = (T[]) new Comparable[DEFAULT_CAPACITY];
