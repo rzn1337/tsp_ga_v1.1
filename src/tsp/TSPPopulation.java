@@ -38,10 +38,6 @@ public class TSPPopulation {
         doSelection();
     }
 
-    /*private void doSelection() {
-        this.population.sort(Comparator.comparingDouble(TSPChromosome::getDistance));
-        this.population = this.population.stream().limit(this.initialSize).collect(Collectors.toList());
-    }*/
 
     private void doSelection() {
         elementsSortByDistance();

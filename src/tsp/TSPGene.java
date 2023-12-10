@@ -1,6 +1,5 @@
 package tsp;
 
-import java.util.Objects;
 
 public class TSPGene implements Comparable<TSPGene> {
     private final int x;
@@ -36,7 +35,13 @@ public class TSPGene implements Comparable<TSPGene> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        int result = 17; // A prime number to initialize the result
+
+        // Combine hash codes of x and y using a formula like (31 * hash1) + hash2
+        result = 31 * result + x;
+        result = 31 * result + y;
+
+        return result;
     }
 
     public double distance(TSPGene other) {
