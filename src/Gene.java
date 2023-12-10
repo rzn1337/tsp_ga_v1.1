@@ -30,7 +30,7 @@ public class Gene implements Comparable<Gene> {
 
     @Override
     public int hashCode() {
-        int result = 17; // A prime number to initialize the result
+        int result = 17;
         result = 31 * result + x;
         result = 31 * result + y;
         return result;

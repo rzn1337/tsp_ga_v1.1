@@ -5,7 +5,6 @@ public class Graph {
     public Graph(ArrayList<Gene> nodes) {
         this.nodes = new ArrayList<>(nodes);
         this.adjacencyMap = new HashMap<>();
-
         for (Gene node : nodes) {
             adjacencyMap.put(node, new HashMap<>());
         }

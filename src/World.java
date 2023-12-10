@@ -61,10 +61,8 @@ public class World extends JPanel {
         g.drawString("pop size : " + this.population.getPopulation().size(), 150, 15);
         g.drawString("shortest path : " + String.format("%.2f", this.population.getAlpha().getDistance()), 500, 15);
 
-        // Draw evolving population
         drawPopulation(g);
 
-        // Draw the best chromosome
         drawBestChromosome(g);
     }
 
