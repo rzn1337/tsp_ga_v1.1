@@ -10,11 +10,8 @@ public class ArrayList<T extends Comparable<T>> implements Iterable<T> {
     private int size;
 
     public ArrayList(ArrayList<T> list) {
-        // Initialize elements array with the same capacity as the passed list
         elements = (T[]) new Comparable[list.elements.length];
         size = list.size;
-
-        // Copy elements from the passed list to this ArrayList
         for (int i = 0; i < size; i++) {
             elements[i] = list.elements[i];
         }
@@ -81,8 +78,6 @@ public class ArrayList<T extends Comparable<T>> implements Iterable<T> {
         Random rand = new Random();
         for (int i = size - 1; i > 0; i--) {
             int randIndex = rand.nextInt(i + 1);
-
-            // Swap elements at i and randIndex
             T temp = elements[i];
             elements[i] = elements[randIndex];
             elements[randIndex] = temp;
@@ -129,8 +124,6 @@ public class ArrayList<T extends Comparable<T>> implements Iterable<T> {
         }
         return elements[index];
     }
-
-    // Other methods like remove, contains, indexOf, clear, etc. can be added as needed.
 }
 
 

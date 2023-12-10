@@ -6,7 +6,7 @@ public class TSPPopulation {
 
     private tsp.ArrayList<TSPChromosome> population;
     private final int initialSize;
-    private final Graph graph;  // Add a reference to the graph
+    private final Graph graph;
 
     TSPPopulation(final Graph graph, final int initialSize) {
         this.population = init(graph, initialSize);
@@ -45,7 +45,6 @@ public class TSPPopulation {
     }
 
     private void elementsSortByDistance() {
-        // Sort the elements based on distance
         for (int i = 0; i < population.size() - 1; i++) {
             for (int j = i + 1; j < population.size(); j++) {
                 if (population.get(i).getDistance() > population.get(j).getDistance()) {
@@ -56,9 +55,7 @@ public class TSPPopulation {
     }
 
     private void limitPopulationSize() {
-        // Keep only the initialSize number of elements
         while (population.size() > initialSize) {
-            //population.getElements()[population.size() - 1] = null;
             population.setSize(population.getSize() - 1);
         }
     }
@@ -80,8 +77,6 @@ public class TSPPopulation {
         final tsp.ArrayList<TSPChromosome> newPopulation = new tsp.ArrayList<>();
         for (final TSPChromosome chromosome : this.population) {
             final TSPChromosome partner = getCrossOverPartner(chromosome);
-
-            // Manual implementation to add elements to the new population
             for (TSPChromosome child : chromosome.crossOver(partner)) {
                 newPopulation.add(child);
             }

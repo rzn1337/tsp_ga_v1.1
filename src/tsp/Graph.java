@@ -15,7 +15,7 @@ public class Graph {
 
     public void addEdge(TSPGene node1, TSPGene node2, double distance) {
         adjacencyMap.get(node1).put(node2, distance);
-        adjacencyMap.get(node2).put(node1, distance); // Assuming undirected graph
+        adjacencyMap.get(node2).put(node1, distance);
     }
 
     public tsp.ArrayList<TSPGene> getNodes() {
@@ -30,8 +30,6 @@ public class Graph {
                 return distance;
             }
         }
-        return Double.POSITIVE_INFINITY; // or throw an exception, depending on your requirements
+        return Double.POSITIVE_INFINITY;
     }
-
-    
 }

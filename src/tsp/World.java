@@ -17,7 +17,7 @@ public class World extends JPanel {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         setBackground(Color.PINK);
 
-        // Prompt the user for input
+
         String[] options = {"Use File", "Generate Random Points"};
         int choice = JOptionPane.showOptionDialog(null, "Choose how to create data points:", "Input Option",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -25,21 +25,18 @@ public class World extends JPanel {
         Graph citiesGraph;
 
         if (choice == 0) {
-            // Use file input
-            String filePath = "data.txt"; // Provide the path to your specific file
+            String filePath = "data.txt";
             citiesGraph = TSPUtils.generateDataFromFile(filePath);
         } else {
-            // Generate random points
             String numCitiesStr = JOptionPane.showInputDialog("Enter the number of cities:");
             int numCities = Integer.parseInt(numCitiesStr);
             citiesGraph = TSPUtils.generateRandomData(numCities);
         }
-        // Add edges between nodes with appropriate distances
         tsp.ArrayList<TSPGene> nodes = citiesGraph.getNodes();
         for (TSPGene node1 : nodes) {
             for (TSPGene node2 : nodes) {
                 if (!node1.equals(node2)) {
-                    double distance = node1.distance(node2); // Use the distance calculation from TSPGene
+                    double distance = node1.distance(node2);
                     citiesGraph.addEdge(node1, node2, distance);
                 }
             }
@@ -50,7 +47,7 @@ public class World extends JPanel {
 
         final Timer timer = new Timer(5, (ActionEvent e) -> {
             this.population.update();
-            repaint();  // Trigger repaint to update the visualization
+            repaint();
         });
         timer.start();
     }

@@ -23,8 +23,6 @@ public class TSPGene implements Comparable<TSPGene> {
         return "(" + x + ", " + y + ")";
     }
 
-    // Additional methods for equality, hashCode, and distance calculation if needed
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -36,11 +34,8 @@ public class TSPGene implements Comparable<TSPGene> {
     @Override
     public int hashCode() {
         int result = 17; // A prime number to initialize the result
-
-        // Combine hash codes of x and y using a formula like (31 * hash1) + hash2
         result = 31 * result + x;
         result = 31 * result + y;
-
         return result;
     }
 
