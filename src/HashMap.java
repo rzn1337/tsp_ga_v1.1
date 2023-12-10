@@ -1,7 +1,5 @@
-package tsp;
-
 public class HashMap<K, V> {
-    private tsp.ArrayList<CustomEntry<K, V>> entries = new tsp.ArrayList<>();
+    private ArrayList<CustomEntry<K, V>> entries = new ArrayList<>();
 
     public void put(K key, V value) {
         for (CustomEntry<K, V> entry : entries) {

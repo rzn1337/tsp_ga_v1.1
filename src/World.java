@@ -1,5 +1,3 @@
-package tsp;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class World extends JPanel {
 
-    private final TSPPopulation population;
+    private final Population population;
     private final AtomicInteger generation;
 
     static final int WIDTH = 800;
@@ -26,15 +24,15 @@ public class World extends JPanel {
 
         if (choice == 0) {
             String filePath = "data.txt";
-            citiesGraph = TSPUtils.generateDataFromFile(filePath);
+            citiesGraph = Utils.generateDataFromFile(filePath);
         } else {
             String numCitiesStr = JOptionPane.showInputDialog("Enter the number of cities:");
             int numCities = Integer.parseInt(numCitiesStr);
-            citiesGraph = TSPUtils.generateRandomData(numCities);
+            citiesGraph = Utils.generateRandomData(numCities);
         }
-        tsp.ArrayList<TSPGene> nodes = citiesGraph.getNodes();
-        for (TSPGene node1 : nodes) {
-            for (TSPGene node2 : nodes) {
+        ArrayList<Gene> nodes = citiesGraph.getNodes();
+        for (Gene node1 : nodes) {
+            for (Gene node2 : nodes) {
                 if (!node1.equals(node2)) {
                     double distance = node1.distance(node2);
                     citiesGraph.addEdge(node1, node2, distance);
@@ -42,7 +40,7 @@ public class World extends JPanel {
             }
         }
 
-        this.population = new TSPPopulation(citiesGraph, 1000);
+        this.population = new Population(citiesGraph, 1000);
         this.generation = new AtomicInteger(0);
 
         final Timer timer = new Timer(5, (ActionEvent e) -> {
@@ -72,31 +70,31 @@ public class World extends JPanel {
 
 
     private void drawPopulation(final Graphics2D g) {
-        final tsp.ArrayList<TSPChromosome> population = this.population.getPopulation();
-        for (TSPChromosome chromosome : population) {
+        final ArrayList<Chromosome> population = this.population.getPopulation();
+        for (Chromosome chromosome : population) {
             drawChromosome(g, chromosome);
         }
     }
-    private void drawChromosome(final Graphics2D g, final TSPChromosome chromosome) {
-        final tsp.ArrayList<TSPGene> genes = chromosome.getChromosome();
+    private void drawChromosome(final Graphics2D g, final Chromosome chromosome) {
+        final ArrayList<Gene> genes = chromosome.getChromosome();
         g.setColor(Color.LIGHT_GRAY);
 
         for (int i = 0; i < genes.size() - 1; i++) {
-            TSPGene gene = genes.get(i);
-            TSPGene neighbor = genes.get(i + 1);
+            Gene gene = genes.get(i);
+            Gene neighbor = genes.get(i + 1);
             g.drawLine(gene.getX(), gene.getY(), neighbor.getX(), neighbor.getY());
         }
     }
     private void drawBestChromosome(final Graphics2D g) {
-        final tsp.ArrayList<TSPGene> chromosome = this.population.getAlpha().getChromosome();
+        final ArrayList<Gene> chromosome = this.population.getAlpha().getChromosome();
         g.setColor(Color.WHITE);
         for (int i = 0; i < chromosome.size() - 1; i++) {
-            TSPGene gene = chromosome.get(i);
-            TSPGene neighbor = chromosome.get(i + 1);
+            Gene gene = chromosome.get(i);
+            Gene neighbor = chromosome.get(i + 1);
             g.drawLine(gene.getX(), gene.getY(), neighbor.getX(), neighbor.getY());
         }
         g.setColor(Color.RED);
-        for (final TSPGene gene : chromosome) {
+        for (final Gene gene : chromosome) {
             g.fillOval(gene.getX(), gene.getY(), 5, 5);
         }
     }

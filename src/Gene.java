@@ -1,11 +1,8 @@
-package tsp;
-
-
-public class TSPGene implements Comparable<TSPGene> {
+public class Gene implements Comparable<Gene> {
     private final int x;
     private final int y;
 
-    public TSPGene(int x, int y) {
+    public Gene(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -27,7 +24,7 @@ public class TSPGene implements Comparable<TSPGene> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TSPGene tspGene = (TSPGene) o;
+        Gene tspGene = (Gene) o;
         return x == tspGene.x && y == tspGene.y;
     }
 
@@ -39,12 +36,12 @@ public class TSPGene implements Comparable<TSPGene> {
         return result;
     }
 
-    public double distance(TSPGene other) {
+    public double distance(Gene other) {
         return Math.sqrt(Math.pow(getX() - other.getX(), 2) + Math.pow(getY() - other.getY(), 2));
     }
 
     @Override
-    public int compareTo(TSPGene o) {
+    public int compareTo(Gene o) {
         return 0;
     }
 }

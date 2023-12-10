@@ -1,5 +1,3 @@
-package tsp;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Random;

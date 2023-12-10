@@ -1,30 +1,28 @@
-package tsp;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
-public class TSPUtils {
+public class Utils {
 
     private final static Random R = new Random(10000);
 
 
-    private TSPUtils() {
+    private Utils() {
         throw new RuntimeException("No!");
     }
 
     static final Graph generateRandomData(int numDataPoints) {
-        final tsp.ArrayList<TSPGene> data = new tsp.ArrayList<>();
+        final ArrayList<Gene> data = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < numDataPoints; i++) {
-            data.add(new TSPGene(random.nextInt(800), random.nextInt(600)));
+            data.add(new Gene(random.nextInt(800), random.nextInt(600)));
         }
         return new Graph(data);
     }
 
     static Graph generateDataFromFile(String filename) {
-        final tsp.ArrayList<TSPGene> data = new tsp.ArrayList<>();
+        final ArrayList<Gene> data = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -32,7 +30,7 @@ public class TSPUtils {
                 if (coordinates.length == 2) {
                     int x = Integer.parseInt(coordinates[0].trim());
                     int y = Integer.parseInt(coordinates[1].trim());
-                    data.add(new TSPGene(x, y));
+                    data.add(new Gene(x, y));
                 } else {
                     System.err.println("Invalid data format in the file");
                 }

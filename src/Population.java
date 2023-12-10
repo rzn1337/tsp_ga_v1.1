@@ -1,31 +1,29 @@
-package tsp;
-
 import java.util.stream.IntStream;
 
-public class TSPPopulation {
+public class Population {
 
-    private tsp.ArrayList<TSPChromosome> population;
+    private ArrayList<Chromosome> population;
     private final int initialSize;
     private final Graph graph;
 
-    TSPPopulation(final Graph graph, final int initialSize) {
+    Population(final Graph graph, final int initialSize) {
         this.population = init(graph, initialSize);
         this.initialSize = initialSize;
         this.graph = graph;
     }
 
-    tsp.ArrayList<TSPChromosome> getPopulation() {
+    ArrayList<Chromosome> getPopulation() {
         return this.population;
     }
 
-    TSPChromosome getAlpha() {
+    Chromosome getAlpha() {
         return this.population.get(0);
     }
 
-    private tsp.ArrayList<TSPChromosome> init(final Graph graph, final int initialSize) {
-        final tsp.ArrayList<TSPChromosome> eden = new tsp.ArrayList<>();
+    private ArrayList<Chromosome> init(final Graph graph, final int initialSize) {
+        final ArrayList<Chromosome> eden = new ArrayList<>();
         for (int i = 0; i < initialSize; i++) {
-            final TSPChromosome chromosome = TSPChromosome.create(graph);
+            final Chromosome chromosome = Chromosome.create(graph);
             eden.add(chromosome);
         }
         return eden;
@@ -61,23 +59,23 @@ public class TSPPopulation {
     }
 
     private void doSpawn() {
-        IntStream.range(0, 1000).forEach(e -> this.population.add(TSPChromosome.create(graph)));
+        IntStream.range(0, 1000).forEach(e -> this.population.add(Chromosome.create(graph)));
     }
 
     private void doMutation() {
-        final tsp.ArrayList<TSPChromosome> newPopulation = new tsp.ArrayList<>();
+        final ArrayList<Chromosome> newPopulation = new ArrayList<>();
         for (int i = 0; i < this.population.size() / 10; i++) {
-            final TSPChromosome mutation = this.population.get(TSPUtils.randomIndex(this.population.size())).mutate();
+            final Chromosome mutation = this.population.get(Utils.randomIndex(this.population.size())).mutate();
             newPopulation.add(mutation);
         }
         this.population.addAll(newPopulation);
     }
 
     private void doCrossOver() {
-        final tsp.ArrayList<TSPChromosome> newPopulation = new tsp.ArrayList<>();
-        for (final TSPChromosome chromosome : this.population) {
-            final TSPChromosome partner = getCrossOverPartner(chromosome);
-            for (TSPChromosome child : chromosome.crossOver(partner)) {
+        final ArrayList<Chromosome> newPopulation = new ArrayList<>();
+        for (final Chromosome chromosome : this.population) {
+            final Chromosome partner = getCrossOverPartner(chromosome);
+            for (Chromosome child : chromosome.crossOver(partner)) {
                 newPopulation.add(child);
             }
         }
@@ -85,10 +83,10 @@ public class TSPPopulation {
     }
 
 
-    private TSPChromosome getCrossOverPartner(final TSPChromosome chromosome) {
-        TSPChromosome partner = this.population.get(TSPUtils.randomIndex(this.population.size()));
+    private Chromosome getCrossOverPartner(final Chromosome chromosome) {
+        Chromosome partner = this.population.get(Utils.randomIndex(this.population.size()));
         while (chromosome == partner) {
-            partner = this.population.get(TSPUtils.randomIndex(this.population.size()));
+            partner = this.population.get(Utils.randomIndex(this.population.size()));
         }
         return partner;
     }
